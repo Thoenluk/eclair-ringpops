@@ -5,8 +5,10 @@ import main.java.program.instruction.InstructionParser;
 import main.java.program.state.ArgumentParser;
 import main.java.program.state.State;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Program {
     private static final String NEWLINE_REGEX = "\\r?\\n";
@@ -56,5 +58,11 @@ public class Program {
 
     public Line[] getLines() {
         return lines;
+    }
+
+    public String prettyPrint() {
+        return Arrays.stream(getLines())
+                .map(Line::prettyPrint)
+                .collect(Collectors.joining("\n"));
     }
 }

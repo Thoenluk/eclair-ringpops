@@ -24,4 +24,9 @@ record Literal(int value) implements Argument {
     public int hashCode() {
         return getValue();
     }
+
+    @Override
+    public String prettyPrint() {
+        return Integer.toString(getValue());
+    }
 }

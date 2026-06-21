@@ -7,26 +7,26 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Line {
-    private static final Pattern COMMENT_START = Pattern.compile("\\s+?[^a-zA-Z1-9]");
+    private static final Pattern COMMENT_START = Pattern.compile("[^\\w\\s-].*");
 
-    private final String text;
     private final int endOfCode;
     private final Instruction instruction;
+    private final String comment;
     private LineValidationResult validationResult;
 
     public Line(final String text, final InstructionParser instructionParser) {
-        this.text = text;
-        this.endOfCode = findEndOfCode();
-        this.instruction = parseInstruction(instructionParser);
+        this.endOfCode = findEndOfCode(text);
+        this.instruction = parseInstruction(text, instructionParser);
+        this.comment = text.substring(endOfCode);
         validate();
     }
 
-    private int findEndOfCode() {
+    private int findEndOfCode(final String text) {
         final Matcher matcher = COMMENT_START.matcher(text);
-        return matcher.matches() ? matcher.start() : text.length();
+        return matcher.find() ? matcher.start() : text.length();
     }
 
-    private Instruction parseInstruction(final InstructionParser instructionParser) {
+    private Instruction parseInstruction(final String text, final InstructionParser instructionParser) {
         final String code = text.substring(0, endOfCode).trim();
         return instructionParser.parse(code);
     }
@@ -42,8 +42,10 @@ public class Line {
         return endOfCode;
     }
 
-    public String getText() {
-        return text;
+    public String prettyPrint() {
+        return comment.isBlank()
+                ? instruction.prettyPrint()
+                : instruction.prettyPrint() + " " + comment;
     }
 
     public boolean hasError() {

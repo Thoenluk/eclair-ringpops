@@ -47,6 +47,7 @@ public class InstructionParser {
     }
 
     public Instruction parse(final String code) {
+        System.out.println(code);
         if (code.isBlank()) {
             return Nop.INSTANCE;
         }

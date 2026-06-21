@@ -1,6 +1,6 @@
 package main.java.program.state;
 
-class Register implements Argument {
+abstract class Register implements Argument {
     private int value = 0;
 
     @Override

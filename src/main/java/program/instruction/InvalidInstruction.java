@@ -18,6 +18,11 @@ public class InvalidInstruction implements Instruction {
     }
 
     @Override
+    public String prettyPrint() {
+        return "";
+    }
+
+    @Override
     public Optional<String> getError() {
         return Optional.ofNullable(formatError);
     }

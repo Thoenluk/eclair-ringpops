@@ -5,6 +5,7 @@ import main.java.program.state.State;
 
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public abstract class ValidInstruction implements Instruction {
     protected final Argument[] arguments;
@@ -18,6 +19,11 @@ public abstract class ValidInstruction implements Instruction {
     protected abstract int getExactArgumentCount();
 
     protected abstract String getName();
+
+    @Override
+    public String prettyPrint() {
+        return getName() + " " + Arrays.stream(arguments).map(Argument::prettyPrint).collect(Collectors.joining(" "));
+    }
 
     @Override
     public Optional<String> getError() {

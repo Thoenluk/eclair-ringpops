@@ -27,6 +27,11 @@ record StackValue(Deque<Integer> stack) implements Argument {
     }
 
     @Override
+    public String prettyPrint() {
+        return "STK";
+    }
+
+    @Override
     public String toString() {
         return stack.stream().map(Object::toString).collect(Collectors.joining("\n"));
     }

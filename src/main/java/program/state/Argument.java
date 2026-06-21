@@ -3,6 +3,8 @@ package main.java.program.state;
 import java.util.function.IntSupplier;
 
 public interface Argument extends IntSupplier {
+    String prettyPrint();
+
     default int getValue() {
         return getAsInt();
     }

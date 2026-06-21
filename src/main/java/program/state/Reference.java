@@ -14,4 +14,9 @@ record Reference(Argument argument, State state) implements Argument {
     public int getAsInt() {
         return state.getRegisterValue(argument.getValue());
     }
+
+    @Override
+    public String prettyPrint() {
+        return "R" + argument.prettyPrint();
+    }
 }

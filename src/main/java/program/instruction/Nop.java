@@ -27,4 +27,9 @@ public class Nop extends ValidInstruction {
     public String getName() {
         return "NOP";
     }
+
+    @Override
+    public String prettyPrint() {
+        return "";
+    }
 }

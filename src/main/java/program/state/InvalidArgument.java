@@ -24,4 +24,9 @@ public record InvalidArgument(String message) implements Argument {
     public String getInvalidMessage() {
         return message;
     }
+
+    @Override
+    public String prettyPrint() {
+        return "INVALID_ARGUMENT";
+    }
 }

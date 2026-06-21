@@ -7,14 +7,14 @@ import java.util.stream.Collectors;
 
 public class State {
     private final Map<Integer, Register> registers = new HashMap<>();
-    private final Register acc = new Register();
-    private final Register ip = new Register();
+    private final Register acc = new NamedRegister("ACC");
+    private final Register ip = new NamedRegister("IP");
     private final StackValue stack = new StackValue();
     private final Map<Integer, Integer> functionLabels = new HashMap<>();
     private int returnValue = 0;
 
     private Register getRegister(final int address) {
-        return registers.computeIfAbsent(address, _ -> new Register());
+        return registers.computeIfAbsent(address, NumberedRegister::new);
     }
 
     public int getRegisterValue(final int address) {

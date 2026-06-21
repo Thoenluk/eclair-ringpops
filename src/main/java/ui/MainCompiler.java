@@ -10,6 +10,7 @@ public class MainCompiler extends JFrame {
     private JTextArea programEditor;
     private JButton run;
     private JScrollPane programScroller;
+    private JButton prettyPrint;
 
     static void main() {
         new MainCompiler(new Program());
@@ -24,12 +25,13 @@ public class MainCompiler extends JFrame {
 
         programEditor.setFont(programEditor.getFont().deriveFont(24f));
         programEditor.setCaretColor(Color.WHITE);
-        programEditor.setSelectionColor(Color.BLUE);
-
+        programEditor.setSelectionColor(new Color(50, 50, 200));
 
         final ValidationHighlighter validationHighlighter = new ValidationHighlighter(programEditor);
         final TooltipAdapter adapter = new TooltipAdapter(programEditor);
         programEditor.addMouseMotionListener(adapter);
         programEditor.getDocument().addDocumentListener(new RecompileListener(program, adapter, validationHighlighter));
+
+        prettyPrint.addActionListener(_ -> programEditor.setText(program.prettyPrint()));
     }
 }
