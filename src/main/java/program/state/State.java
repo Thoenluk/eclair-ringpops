@@ -70,12 +70,33 @@ public class State {
     }
 
     public void print(final String output) {
-        System.out.println(output);
+        System.out.print(output);
         // Definitely replace this with a more sensible in-GUI solution, but I can't use what I ain't built 3:
     }
 
     public void addFunctionLabel(final int label, final int lineNumber) {
         functionLabels.put(label, lineNumber);
+    }
+
+    public int getIpValue() {
+        return ip.getValue();
+    }
+
+    public void advance() {
+        ip.setValue(getIpValue() + 1);
+    }
+
+    public int getReturnValue() {
+        return returnValue;
+    }
+
+    public void reset() {
+        acc.clear();
+        ip.clear();
+        stack.clear();
+        for (final Register register : registers.values()) {
+            register.clear();
+        }
     }
 
     // Readonly view by type safety with zero overhead. How's that?

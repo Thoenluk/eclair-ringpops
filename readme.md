@@ -1,7 +1,10 @@
 # The Elfcode computer
 
-An interpreter and runtime environment for a mostly-assembly-like language running in Java.
-Who wouldn't want to combine the complicated programming of low-level with the performance overheads of high-level?
+An interpreter and runtime environment for a mostly-assembly-like language running in Java.  
+Who wouldn't want to combine the complicated programming of low-level with the performance overheads of high-level?  
+Worse yet, it's Turing complete-ish! A sufficiently sophisticated Elfcode program could implement any algorithm in the
+world, limited only by a virtual address space of 2^32 registers, equivalent to 16GB of RAM (as each register contains 4
+bytes of theoretically usable space).
 
 ## Usage
 
@@ -69,6 +72,7 @@ Either case is considered a successful execution.
 * PRT arg0: Print arg0 to console as a number.
 * PRC arg0: Print arg0 to console as the char it represents, using Unicode encoding
     * Unicode support having seemed a good idea at the time 🤷
+    * Side note: No, there is not a dedicated println instruction. You remember the ASCII index of \n, don't you?
 
 ### Arguments
 

@@ -2,6 +2,8 @@ package main.java.program;
 
 import main.java.program.instruction.Instruction;
 import main.java.program.instruction.InstructionParser;
+import main.java.program.instruction.ValidInstruction;
+import main.java.program.state.State;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,12 +12,14 @@ public class Line {
     private static final Pattern COMMENT_START = Pattern.compile("[^\\w\\s-].*");
 
     private final int endOfCode;
+    private final String text;
     private final Instruction instruction;
     private final String comment;
     private LineValidationResult validationResult;
 
     public Line(final String text, final InstructionParser instructionParser) {
         this.endOfCode = findEndOfCode(text);
+        this.text = text;
         this.instruction = parseInstruction(text, instructionParser);
         this.comment = text.substring(endOfCode);
         validate();
@@ -62,5 +66,18 @@ public class Line {
 
     Instruction getInstruction() {
         return instruction;
+    }
+
+    void execute(final State state) throws ProgramInterrupt {
+        try {
+            ((ValidInstruction) instruction).execute(state);
+        } catch (final Exception e) {
+            throw new ProgramExecutionException(e);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return text;
     }
 }

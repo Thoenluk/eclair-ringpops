@@ -14,11 +14,11 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 public class RecompileListener implements DocumentListener {
-    final Program program;
-    final TooltipAdapter adapter;
-    final ValidationHighlighter validationHighlighter;
-    final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-    ScheduledFuture<?> task = null;
+    private final Program program;
+    private final TooltipAdapter adapter;
+    private final ValidationHighlighter validationHighlighter;
+    private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+    private ScheduledFuture<?> task = null;
 
     public RecompileListener(final Program program, final TooltipAdapter adapter, final ValidationHighlighter validationHighlighter) {
         this.program = program;
